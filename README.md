@@ -1,6 +1,6 @@
-# 🦜️🔗 LangChain {partner}
+# 🦜️🔗 LangChain Together
 
-This repository contains 1 package with {partner} integrations with LangChain:
+This repository contains 1 package with Together integrations with LangChain:
 
 - [langchain-{package_lower}](https://pypi.org/project/langchain-{package_lower}/)
 
@@ -46,5 +46,5 @@ Slack
 - [ ] Set up release alerting in Slack (ask Erick for help)
 
 release:
-/github subscribe langchain-ai/langchain-{partner_lower} releases workflows:{name:"release"}
-/github unsubscribe langchain-ai/langchain-{partner_lower} issues pulls commits deployments
+/github subscribe langchain-ai/langchain-together releases workflows:{name:"release"}
+/github unsubscribe langchain-ai/langchain-together issues pulls commits deployments
