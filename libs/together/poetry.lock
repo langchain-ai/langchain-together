@@ -701,7 +701,7 @@ typing-extensions = ">=4.7"
 type = "git"
 url = "https://github.com/langchain-ai/langchain.git"
 reference = "HEAD"
-resolved_reference = "fabd3295fabb4c79fedb4dbbe725a308658ef8d8"
+resolved_reference = "e7c856c2980ad9ff9aeeb1185f4e6073ef7bb934"
 subdirectory = "libs/core"
 
 [[package]]
@@ -722,7 +722,7 @@ tiktoken = ">=0.7,<1"
 type = "git"
 url = "https://github.com/langchain-ai/langchain.git"
 reference = "HEAD"
-resolved_reference = "fabd3295fabb4c79fedb4dbbe725a308658ef8d8"
+resolved_reference = "e7c856c2980ad9ff9aeeb1185f4e6073ef7bb934"
 subdirectory = "libs/partners/openai"
 
 [[package]]
@@ -743,7 +743,7 @@ pytest = ">=7,<9"
 type = "git"
 url = "https://github.com/langchain-ai/langchain.git"
 reference = "HEAD"
-resolved_reference = "fabd3295fabb4c79fedb4dbbe725a308658ef8d8"
+resolved_reference = "e7c856c2980ad9ff9aeeb1185f4e6073ef7bb934"
 subdirectory = "libs/standard-tests"
 
 [[package]]
