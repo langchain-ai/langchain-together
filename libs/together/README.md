@@ -26,25 +26,3 @@ NEED to add image endpoint + completions endpoint as well
 See a [usage example](https://python.langchain.com/docs/integrations/text_embedding/together/)
 
 Use `togethercomputer/m2-bert-80M-8k-retrieval` as the default model for embeddings.
-
-## Setup for testing
-
-```bash
-cd libs/together
-poetry install --with lint,typing,test,test_integration,
-```
-
-## Running the Unit Tests
-
-```bash
-cd libs/together
-make tests
-```
-
-## Running the Integration Tests
-
-```bash
-cd libs/together
-export TOGETHER_API_KEY=<your-api-key>
-make integration_tests
-```
