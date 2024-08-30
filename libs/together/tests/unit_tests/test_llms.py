@@ -10,7 +10,7 @@ def test_together_api_key_is_secret_string() -> None:
     """Test that the API key is stored as a SecretStr."""
     llm = Together(
         together_api_key="secret-api-key",  # type: ignore[call-arg]
-        model="togethercomputer/RedPajama-INCITE-7B-Base",
+        model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
         temperature=0.2,
         max_tokens=250,
     )
@@ -23,7 +23,7 @@ def test_together_api_key_masked_when_passed_from_env(
     """Test that the API key is masked when passed from an environment variable."""
     monkeypatch.setenv("TOGETHER_API_KEY", "secret-api-key")
     llm = Together(  # type: ignore[call-arg]
-        model="togethercomputer/RedPajama-INCITE-7B-Base",
+        model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
         temperature=0.2,
         max_tokens=250,
     )
@@ -39,7 +39,7 @@ def test_together_api_key_masked_when_passed_via_constructor(
     """Test that the API key is masked when passed via the constructor."""
     llm = Together(
         together_api_key="secret-api-key",  # type: ignore[call-arg]
-        model="togethercomputer/RedPajama-INCITE-7B-Base",
+        model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
         temperature=0.2,
         max_tokens=250,
     )
@@ -53,7 +53,7 @@ def test_together_uses_actual_secret_value_from_secretstr() -> None:
     """Test that the actual secret value is correctly retrieved."""
     llm = Together(
         together_api_key="secret-api-key",  # type: ignore[call-arg]
-        model="togethercomputer/RedPajama-INCITE-7B-Base",
+        model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
         temperature=0.2,
         max_tokens=250,
     )
@@ -64,7 +64,7 @@ def test_together_uses_actual_secret_value_from_secretstr_api_key() -> None:
     """Test that the actual secret value is correctly retrieved."""
     llm = Together(
         api_key="secret-api-key",  # type: ignore[arg-type]
-        model="togethercomputer/RedPajama-INCITE-7B-Base",
+        model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
         temperature=0.2,
         max_tokens=250,
     )
