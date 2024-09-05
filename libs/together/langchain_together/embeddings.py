@@ -17,17 +17,15 @@ from typing import (
 
 import openai
 from langchain_core.embeddings import Embeddings
-from langchain_core.pydantic_v1 import (
+from langchain_core.utils import from_env, get_pydantic_field_names, secret_from_env
+from pydantic import (
     BaseModel,
+    ConfigDict,
     Field,
     SecretStr,
-    root_validator,
+    model_validator,
 )
-from langchain_core.utils import (
-    from_env,
-    get_pydantic_field_names,
-    secret_from_env,
-)
+from typing_extensions import Self
 
 logger = logging.getLogger(__name__)
 
@@ -174,14 +172,14 @@ class TogetherEmbeddings(BaseModel, Embeddings):
     """Optional httpx.AsyncClient. Only used for async invocations. Must specify
         http_client as well if you'd like a custom client for sync invocations."""
 
-    class Config:
-        """Configuration for this pydantic object."""
+    model_config = ConfigDict(
+        extra="forbid",
+        populate_by_name=True,
+    )
 
-        extra = "forbid"
-        allow_population_by_field_name = True
-
-    @root_validator(pre=True)
-    def build_extra(cls, values: Dict[str, Any]) -> Dict[str, Any]:
+    @model_validator(mode="before")
+    @classmethod
+    def build_extra(cls, values: Dict[str, Any]) -> Any:
         """Build extra kwargs from additional params that were passed in."""
         all_required_field_names = get_pydantic_field_names(cls)
         extra = values.get("model_kwargs", {})
@@ -206,38 +204,36 @@ class TogetherEmbeddings(BaseModel, Embeddings):
         values["model_kwargs"] = extra
         return values
 
-    @root_validator(pre=False, skip_on_failure=True)
-    def post_init(cls, values: Dict) -> Dict:
+    @model_validator(mode="after")
+    def post_init(self) -> Self:
         """Logic that will post Pydantic initialization."""
-        client_params = {
+        client_params: dict = {
             "api_key": (
-                values["together_api_key"].get_secret_value()
-                if values["together_api_key"]
+                self.together_api_key.get_secret_value()
+                if self.together_api_key
                 else None
             ),
-            "base_url": values["together_api_base"],
-            "timeout": values["request_timeout"],
-            "max_retries": values["max_retries"],
-            "default_headers": values["default_headers"],
-            "default_query": values["default_query"],
+            "base_url": self.together_api_base,
+            "timeout": self.request_timeout,
+            "max_retries": self.max_retries,
+            "default_headers": self.default_headers,
+            "default_query": self.default_query,
         }
-        if not values.get("client"):
-            sync_specific = (
-                {"http_client": values["http_client"]} if values["http_client"] else {}
+        if not (self.client or None):
+            sync_specific: dict = (
+                {"http_client": self.http_client} if self.http_client else {}
             )
-            values["client"] = openai.OpenAI(
-                **client_params, **sync_specific
-            ).embeddings
-        if not values.get("async_client"):
-            async_specific = (
-                {"http_client": values["http_async_client"]}
-                if values["http_async_client"]
+            self.client = openai.OpenAI(**client_params, **sync_specific).embeddings
+        if not (self.async_client or None):
+            async_specific: dict = (
+                {"http_client": self.http_async_client}
+                if self.http_async_client
                 else {}
             )
-            values["async_client"] = openai.AsyncOpenAI(
+            self.async_client = openai.AsyncOpenAI(
                 **client_params, **async_specific
             ).embeddings
-        return values
+        return self
 
     @property
     def _invocation_params(self) -> Dict[str, Any]:

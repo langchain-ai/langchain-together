@@ -9,12 +9,10 @@ from typing import (
 
 import openai
 from langchain_core.language_models.chat_models import LangSmithParams
-from langchain_core.pydantic_v1 import Field, SecretStr, root_validator
-from langchain_core.utils import (
-    from_env,
-    secret_from_env,
-)
+from langchain_core.utils import from_env, secret_from_env
 from langchain_openai.chat_models.base import BaseChatOpenAI
+from pydantic import ConfigDict, Field, SecretStr, model_validator
+from typing_extensions import Self
 
 
 class ChatTogether(BaseChatOpenAI):
@@ -135,7 +133,7 @@ class ChatTogether(BaseChatOpenAI):
     Tool calling:
         .. code-block:: python
 
-            from langchain_core.pydantic_v1 import BaseModel, Field
+            from pydantic import BaseModel, Field
 
             # Only certain models support tool calling, check the together website to confirm compatibility
             llm = ChatTogether(model="mistralai/Mixtral-8x7B-Instruct-v0.1")
@@ -183,7 +181,7 @@ class ChatTogether(BaseChatOpenAI):
 
             from typing import Optional
 
-            from langchain_core.pydantic_v1 import BaseModel, Field
+            from pydantic import BaseModel, Field
 
 
             class Joke(BaseModel):
@@ -325,40 +323,39 @@ class ChatTogether(BaseChatOpenAI):
         alias="base_url",
     )
 
-    class Config:
-        """Pydantic config."""
+    model_config = ConfigDict(
+        populate_by_name=True,
+    )
 
-        allow_population_by_field_name = True
-
-    @root_validator(pre=False, skip_on_failure=True)
-    def validate_environment(cls, values: Dict) -> Dict:
+    @model_validator(mode="after")
+    def validate_environment(self) -> Self:
         """Validate that api key and python package exists in environment."""
-        if values["n"] < 1:
+        if self.n < 1:
             raise ValueError("n must be at least 1.")
-        if values["n"] > 1 and values["streaming"]:
+        if self.n > 1 and self.streaming:
             raise ValueError("n must be 1 when streaming.")
 
-        client_params = {
+        client_params: dict = {
             "api_key": (
-                values["together_api_key"].get_secret_value()
-                if values["together_api_key"]
+                self.together_api_key.get_secret_value()
+                if self.together_api_key
                 else None
             ),
-            "base_url": values["together_api_base"],
-            "timeout": values["request_timeout"],
-            "max_retries": values["max_retries"],
-            "default_headers": values["default_headers"],
-            "default_query": values["default_query"],
+            "base_url": self.together_api_base,
+            "timeout": self.request_timeout,
+            "max_retries": self.max_retries,
+            "default_headers": self.default_headers,
+            "default_query": self.default_query,
         }
 
-        if not values.get("client"):
-            sync_specific = {"http_client": values["http_client"]}
-            values["client"] = openai.OpenAI(
+        if not (self.client or None):
+            sync_specific: dict = {"http_client": self.http_client}
+            self.client = openai.OpenAI(
                 **client_params, **sync_specific
             ).chat.completions
-        if not values.get("async_client"):
-            async_specific = {"http_client": values["http_async_client"]}
-            values["async_client"] = openai.AsyncOpenAI(
+        if not (self.async_client or None):
+            async_specific: dict = {"http_client": self.http_async_client}
+            self.async_client = openai.AsyncOpenAI(
                 **client_params, **async_specific
             ).chat.completions
-        return values
+        return self

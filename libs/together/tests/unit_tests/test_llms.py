@@ -1,6 +1,6 @@
 from typing import cast
 
-from langchain_core.pydantic_v1 import SecretStr
+from pydantic import SecretStr
 from pytest import CaptureFixture, MonkeyPatch  # type: ignore[import-not-found]
 
 from langchain_together import Together
