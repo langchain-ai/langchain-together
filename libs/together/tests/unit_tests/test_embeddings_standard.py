@@ -2,21 +2,19 @@
 
 from typing import Tuple, Type
 
-from langchain_core.language_models import BaseChatModel
-from langchain_standard_tests.unit_tests import (  # type: ignore[import-not-found]
-    ChatModelUnitTests,  # type: ignore[import-not-found]
-)
+from langchain_core.embeddings import Embeddings
+from langchain_standard_tests.unit_tests.embeddings import EmbeddingsUnitTests
 
-from langchain_together import ChatTogether
+from langchain_together import TogetherEmbeddings
 
 
-class TestTogetherStandard(ChatModelUnitTests):
+class TestTogetherStandard(EmbeddingsUnitTests):
     @property
-    def chat_model_class(self) -> Type[BaseChatModel]:
-        return ChatTogether
+    def embeddings_class(self) -> Type[Embeddings]:
+        return TogetherEmbeddings
 
     @property
-    def chat_model_params(self) -> dict:
+    def embeddings_params(self) -> dict:
         return {"model": "meta-llama/Llama-3-8b-chat-hf"}
 
     @property
