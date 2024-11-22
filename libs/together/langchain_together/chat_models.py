@@ -350,9 +350,8 @@ class ChatTogether(BaseChatOpenAI):
 
         if not (self.client or None):
             sync_specific: dict = {"http_client": self.http_client}
-            self.client = openai.OpenAI(
-                **client_params, **sync_specific
-            ).chat.completions
+            self.root_client = openai.OpenAI(**client_params, **sync_specific)
+            self.client = self.root_client.chat.completions
         if not (self.async_client or None):
             async_specific: dict = {"http_client": self.http_async_client}
             self.async_client = openai.AsyncOpenAI(
