@@ -126,3 +126,23 @@ def test_invoke() -> None:
 
     result = llm.invoke("I'm Pickle Rick", config=dict(tags=["foo"]))
     assert isinstance(result.content, str)
+
+
+def test_invoke_json_mode_through_model_kwargs() -> None:
+    """Test invoke json_model invocation works"""
+    llm = ChatTogether(
+        model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+        model_kwargs={"response_format": {"type": "json_object"}},
+    )
+    result = llm.invoke("I'm Pickle Rick")
+    assert isinstance(result.content, str)
+
+
+def test_invoke_json_mode_through_bind() -> None:
+    """Test invoke json_model invocation works"""
+    llm = ChatTogether(
+        model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+    )
+    llm.bind(response_format={"type": "json_object"})
+    result = llm.invoke("I'm Pickle Rick")
+    assert isinstance(result.content, str)
