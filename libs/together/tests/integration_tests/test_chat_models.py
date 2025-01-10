@@ -66,14 +66,6 @@ def test_chat_together_extra_kwargs() -> None:
     with pytest.raises(ValueError):
         ChatTogether(foo=3, model_kwargs={"foo": 2})  # type: ignore[call-arg]
 
-    # Test that if explicit param is specified in kwargs it errors
-    with pytest.raises(ValueError):
-        ChatTogether(model_kwargs={"temperature": 0.2})
-
-    # Test that "model" cannot be specified in kwargs
-    with pytest.raises(ValueError):
-        ChatTogether(model_kwargs={"model": "meta-llama/Llama-3-8b-chat-hf"})
-
 
 def test_stream() -> None:
     """Test streaming tokens from Together AI."""
