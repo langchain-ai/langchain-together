@@ -48,7 +48,7 @@ class ChatTogether(BaseChatOpenAI):
     Instantiate:
         .. code-block:: python
 
-            from langhcain_together import ChatTogether
+            from langchain_together import ChatTogether
 
             llm = ChatTogether(
                 model="meta-llama/Llama-3-70b-chat-hf",
