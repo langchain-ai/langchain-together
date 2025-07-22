@@ -24,7 +24,7 @@ class TestTogetherStandard(ChatModelIntegrationTests):
     @property
     def chat_model_params(self) -> dict:
         return {
-            "model": "mistralai/Mixtral-8x7B-Instruct-v0.1",
+            "model": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
             "rate_limiter": rate_limiter,
         }
 
