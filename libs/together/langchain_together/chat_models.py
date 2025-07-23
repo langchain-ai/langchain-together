@@ -306,7 +306,9 @@ class ChatTogether(BaseChatOpenAI):
         params["ls_provider"] = "together"
         return params
 
-    model_name: str = Field(default="meta-llama/Llama-3-8b-chat-hf", alias="model")
+    model_name: str = Field(
+        default="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo", alias="model"
+    )
     """Model name to use."""
     together_api_key: Optional[SecretStr] = Field(
         alias="api_key",
@@ -354,9 +356,13 @@ class ChatTogether(BaseChatOpenAI):
             self.client = openai.OpenAI(
                 **client_params, **sync_specific
             ).chat.completions
+            self.root_client = openai.OpenAI(**client_params, **sync_specific)
         if not (self.async_client or None):
             async_specific: dict = {"http_client": self.http_async_client}
             self.async_client = openai.AsyncOpenAI(
                 **client_params, **async_specific
             ).chat.completions
+            self.root_async_client = openai.AsyncOpenAI(
+                **client_params, **async_specific
+            )
         return self

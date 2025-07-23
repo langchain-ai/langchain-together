@@ -103,9 +103,8 @@ class TogetherEmbeddings(BaseModel, Embeddings):
 
     client: Any = Field(default=None, exclude=True)  #: :meta private:
     async_client: Any = Field(default=None, exclude=True)  #: :meta private:
-    model: str = "togethercomputer/m2-bert-80M-8k-retrieval"
+    model: str = "BAAI/bge-base-en-v1.5"
     """Embeddings model name to use.
-    Instead, use 'togethercomputer/m2-bert-80M-8k-retrieval' for example.
     """
     dimensions: Optional[int] = None
     """The number of dimensions the resulting output embeddings should have.

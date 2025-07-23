@@ -32,6 +32,12 @@ runs:
       with:
         python-version: ${{ inputs.python-version }}
 
+    - name: Upgrade pip
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip setuptools wheel
+        python -m ensurepip --upgrade
+
     - uses: actions/cache@v4
       id: cache-bin-poetry
       name: Cache Poetry binary - Python ${{ inputs.python-version }}
@@ -55,7 +61,7 @@ runs:
         # Refresh the shell hashtable, to ensure correct `which` output.
         hash -r
 
-        # `actions/cache@v3` doesn't always seem able to correctly unpack softlinks.
+        # `actions/cache@v3` doesn't always seem to be able to correctly unpack softlinks.
         # Delete and recreate the softlinks pipx expects to have.
         rm /opt/pipx/venvs/poetry/bin/python
         cd /opt/pipx/venvs/poetry/bin
