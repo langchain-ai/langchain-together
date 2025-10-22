@@ -107,7 +107,7 @@ class Together(LLM):
         """Return the default parameters for the Together model.
 
         Returns:
-            A dictionary containing the default parameters.
+            `dict` containing the default parameters.
         """
         return {
             "model": self.model,
