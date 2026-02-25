@@ -843,7 +843,7 @@ description = "Client library to connect to the LangSmith LLM Tracing and Evalua
 optional = false
 python-versions = ">=3.9"
 groups = ["main", "test"]
-markers = "python_version < \"3.12\""
+markers = "python_version == \"3.9\""
 files = [
     {file = "langsmith-0.4.37-py3-none-any.whl", hash = "sha256:e34a94ce7277646299e4703a0f6e2d2c43647a28e8b800bb7ef82fd87a0ec766"},
     {file = "langsmith-0.4.37.tar.gz", hash = "sha256:d9a0eb6dd93f89843ac982c9f92be93cf2bcabbe19957f362c547766c7366c71"},
@@ -873,7 +873,7 @@ description = "Client library to connect to the LangSmith Observability and Eval
 optional = false
 python-versions = ">=3.10"
 groups = ["main", "test"]
-markers = "python_version >= \"3.12\""
+markers = "python_version >= \"3.10\""
 files = [
     {file = "langsmith-0.7.6-py3-none-any.whl", hash = "sha256:28d256584969db723b68189a7dbb065836572728ab4d9597ec5379fe0a1e1641"},
     {file = "langsmith-0.7.6.tar.gz", hash = "sha256:e8646f8429d3c1641c7bae3c01bfdc3dfa27625994b0ef4303714d6b06fe1ef9"},
@@ -2188,7 +2188,7 @@ description = "Python binding for xxHash"
 optional = false
 python-versions = ">=3.7"
 groups = ["main", "test"]
-markers = "python_version >= \"3.12\""
+markers = "python_version >= \"3.10\""
 files = [
     {file = "xxhash-3.6.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:87ff03d7e35c61435976554477a7f4cd1704c3596a89a8300d5ce7fc83874a71"},
     {file = "xxhash-3.6.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:f572dfd3d0e2eb1a57511831cf6341242f5a9f8298a45862d085f5b93394a27d"},
@@ -2544,4 +2544,4 @@ cffi = ["cffi (>=1.17,<2.0) ; platform_python_implementation != \"PyPy\" and pyt
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<4.0"
-content-hash = "8bdb87e1c05af3ff927d23759b0e97b5a33973d034ded7afdfa49e8796e4c443"
+content-hash = "0149d31dc0eed16d2cb2b458876ab67f666c0b92030acd12846f00ff09b96ffe"
