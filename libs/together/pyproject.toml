@@ -21,9 +21,13 @@ disallow_untyped_defs = "True"
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
 langchain-openai = "^0.3"
-langchain-core = "^0.3.29"
+langchain-core = "^0.3.81"
 requests = "^2"
-aiohttp = "^3.9.1"
+aiohttp = "^3.13.3"
+# CVE-2025-43859: h11 < 0.16.0 is vulnerable to malformed Chunked-Encoding body acceptance.
+h11 = ">=0.16.0"
+# CVE-2025-66418, CVE-2025-66471, CVE-2026-21441: urllib3 < 2.6.3 has multiple decompression bomb / redirect vulnerabilities.
+urllib3 = ">=2.6.3"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "D"]
