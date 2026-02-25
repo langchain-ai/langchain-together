@@ -19,7 +19,7 @@ disallow_untyped_defs = "True"
 "Release Notes" = "https://github.com/langchain-ai/langchain-together/releases"
 
 [tool.poetry.dependencies]
-python = ">=3.9,<4.0"
+python = ">=3.10,<4.0"
 langchain-openai = "^0.3"
 langchain-core = "^0.3.81"
 # CVE-2024-47081: requests < 2.32.4 leaks .netrc credentials via malicious URLs.
@@ -30,12 +30,8 @@ h11 = ">=0.16.0"
 # CVE-2025-66418, CVE-2025-66471, CVE-2026-21441: urllib3 < 2.6.3 has multiple decompression bomb / redirect vulnerabilities.
 urllib3 = ">=2.6.3"
 # CVE-2026-25528: langsmith >= 0.4.10, < 0.6.3 is vulnerable to SSRF via tracing headers.
-# langsmith >= 0.6.3 requires Python >= 3.10; Python 3.9 has no patched release available upstream.
 # Remove this constraint once langchain-core pulls in langsmith >= 0.6.3 directly.
-langsmith = [
-    {version = ">=0.6.3", python = ">=3.10"},
-    {version = ">=0.3.45", python = "<3.10"},
-]
+langsmith = ">=0.6.3"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "D"]
