@@ -97,5 +97,5 @@ result = structured_llm.invoke(
 ```python
 from langchain_together import TogetherEmbeddings
 
-embeddings = TogetherEmbeddings(model="BAAI/bge-base-en-v1.5")
+embeddings = TogetherEmbeddings(model="intfloat/multilingual-e5-large-instruct")
 ```

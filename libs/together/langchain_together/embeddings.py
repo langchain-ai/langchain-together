@@ -103,7 +103,7 @@ class TogetherEmbeddings(BaseModel, Embeddings):
 
     client: Any = Field(default=None, exclude=True)  #: :meta private:
     async_client: Any = Field(default=None, exclude=True)  #: :meta private:
-    model: str = "BAAI/bge-base-en-v1.5"
+    model: str = "intfloat/multilingual-e5-large-instruct"
     """Embeddings model name to use.
     """
     dimensions: Optional[int] = None
