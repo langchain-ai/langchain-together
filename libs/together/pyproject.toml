@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "langchain-together"
-version = "0.3.1"
+version = "0.4.0"
 description = "An integration package connecting Together AI and LangChain"
 authors = []
 readme = "README.md"
@@ -89,12 +89,12 @@ codespell = "^2.2.0"
 
 [tool.poetry.group.test_integration.dependencies]
 [[tool.poetry.group.test_integration.dependencies.numpy]]
-version = "^1"
-python = "<3.12"
+version = "^1.26.0"
+python = "<3.13"
 
 [[tool.poetry.group.test_integration.dependencies.numpy]]
-version = "^1.26.0"
-python = ">=3.12"
+version = "^2.1.0"
+python = ">=3.13"
 
 
 [tool.poetry.group.lint.dependencies]
