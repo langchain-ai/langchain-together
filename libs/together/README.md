@@ -21,7 +21,7 @@ os.environ["TOGETHER_API_KEY"] = "my-key"
 
 
 llm = ChatTogether(
-    model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+    model="Qwen/Qwen2.5-7B-Instruct-Turbo",
     temperature=0,
     max_tokens=None,
     timeout=None,
@@ -34,7 +34,6 @@ llm = ChatTogether(
 
 `ChatTogether` supports structured outputs using Pydantic models, dictionaries, or JSON schemas. This feature allows you to get reliable, structured responses from Together AI models. See here the docs for more info about [function calling](https://docs.together.ai/docs/function-calling) and [structured outputs](https://docs.together.ai/docs/json-mode)
 
-
 ```python
 from langchain_together import ChatTogether
 from pydantic import BaseModel, Field
@@ -46,7 +45,7 @@ class Joke(BaseModel):
     rating: Optional[int] = Field(default=None, description="How funny the joke is from 1-10")
 
 # Use a model that supports function calling
-llm = ChatTogether(model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo")
+llm = ChatTogether(model="Qwen/Qwen2.5-7B-Instruct-Turbo")
 structured_llm = llm.with_structured_output(Joke.model_json_schema(), method="json_schema")
 
 result = structured_llm.invoke("Tell me a joke about programming")
@@ -55,13 +54,12 @@ print(f"Punchline: {result.punchline}")
 print(f"Rating: {result.rating}")
 ```
 
-### Function Calling  
-
+### Function Calling
 
 ```python
 
 # Use a model that supports function calling
-llm = ChatTogether(model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo")
+llm = ChatTogether(model="Qwen/Qwen2.5-7B-Instruct-Turbo")
 structured_llm = llm.with_structured_output(Joke, method="function_calling")
 
 result = structured_llm.invoke("Tell me a joke about programming")
@@ -70,7 +68,7 @@ print(f"Punchline: {result.punchline}")
 print(f"Rating: {result.rating}")
 ```
 
-### JSON Mode 
+### JSON Mode
 
 For models that support JSON mode, you can also use this method:
 
@@ -83,7 +81,7 @@ class Response(BaseModel):
     category: str = Field(description="Category of the response")
 
 # Use a model that supports JSON mode
-llm = ChatTogether(model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo")
+llm = ChatTogether(model="Qwen/Qwen2.5-7B-Instruct-Turbo")
 structured_llm = llm.with_structured_output(Response.model_json_schema(), method="json_mode")
 
 result = structured_llm.invoke(

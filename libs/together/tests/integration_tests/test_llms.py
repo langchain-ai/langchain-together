@@ -13,7 +13,7 @@ from langchain_together import Together
 def test_together_call() -> None:
     """Test simple call to together."""
     llm = Together(  # type: ignore[call-arg]
-        model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+        model="Qwen/Qwen2.5-7B-Instruct-Turbo",
         temperature=0.2,
         max_tokens=250,
     )
@@ -27,7 +27,7 @@ def test_together_call() -> None:
 async def test_together_acall() -> None:
     """Test simple call to together."""
     llm = Together(  # type: ignore[call-arg]
-        model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+        model="Qwen/Qwen2.5-7B-Instruct-Turbo",
         temperature=0.2,
         max_tokens=250,
     )
