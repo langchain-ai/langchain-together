@@ -22,6 +22,7 @@ disallow_untyped_defs = "True"
 python = ">=3.10,<4.0"
 langchain-openai = ">=1.1.12,<2"
 langchain-core = ">=1.2.22,<2"
+typing-extensions = ">=4.15,<5"
 # CVE-2024-47081: requests < 2.32.4 leaks .netrc credentials via malicious URLs.
 requests = ">=2.32.4,<3"
 aiohttp = "^3.13.3"
