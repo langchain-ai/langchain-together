@@ -22,10 +22,10 @@ disallow_untyped_defs = "True"
 python = ">=3.10,<4.0"
 langchain-openai = ">=1.1.12,<2"
 langchain-core = ">=1.2.22,<2"
-typing-extensions = ">=4.15,<5"
+typing-extensions = ">=4.15"
 # CVE-2024-47081: requests < 2.32.4 leaks .netrc credentials via malicious URLs.
-requests = ">=2.32.4,<3"
-aiohttp = "^3.13.3"
+requests = ">=2.32.4"
+aiohttp = ">=3.13.3"
 # CVE-2025-43859: h11 < 0.16.0 is vulnerable to malformed Chunked-Encoding body acceptance.
 h11 = ">=0.16.0"
 # CVE-2025-66418, CVE-2025-66471, CVE-2026-21441: urllib3 < 2.6.3 has multiple decompression bomb / redirect vulnerabilities.
